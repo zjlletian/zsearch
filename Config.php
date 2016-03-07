@@ -10,5 +10,5 @@ set_include_path($include_path);
 //默认时区
 date_default_timezone_set('Asia/Shanghai');
 
-//Zspider API 地址
-$GLOBALS['ZSPIDERAPI'] = 'http://spider.zhouvm.com/';
+//Zspider Elasticsearch 集群地址
+$GLOBALS['ESHOST'] = array('http://localhost:9200');
