@@ -1,2 +1,2 @@
 # zsearch
-web search based on zspider api
+web search based on zspider.
