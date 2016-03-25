@@ -10,4 +10,4 @@ set_include_path($include_path);
 //默认时区
 date_default_timezone_set('Asia/Shanghai');
 
-require_once(APPROOT.'/db.int.php');
+require_once(APPROOT.'/db.inc.php');
