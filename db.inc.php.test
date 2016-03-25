@@ -1,0 +1,4 @@
+<?php
+
+//Zspider Elasticsearch 集群地址
+$GLOBALS['ESHOST'] = array('http://localhost:9200');
