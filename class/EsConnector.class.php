@@ -9,7 +9,7 @@ class ESConnector {
 	//建立连接
 	static function connect(){
 		if(self::$esclient==null){
-			self::$esclient = Elasticsearch\ClientBuilder::create()->setHosts($GLOBALS['ELASTICSEARCH'])->build();
+			self::$esclient = Elasticsearch\ClientBuilder::create()->setHosts($GLOBALS['ESHOST'])->build();
 		}
 		return true;
 	}
