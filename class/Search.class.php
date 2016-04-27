@@ -12,15 +12,17 @@ class Search{
                 "query_string"=>[
                     "query"=>$keyword,
                     "default_field"=> "title",
-                    "fields"=> ["title","url","text"]
+                    "fields"=> ["title","text","url"]
                 ]
             ],
             "highlight"=>[
                 "fields"=>[
                     "title"=>new stdClass(),
-                    "text"=>new stdClass()
+                    "text"=>new stdClass(),
+                    "url"=>new stdClass()
                 ]
-            ]
+            ],
+            "min_score"=>0.52
         ];
         return ESConnector::search('zspider','html',$searcharray);
     }

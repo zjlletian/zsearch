@@ -1,9 +1,51 @@
-.searchitem{
-    width: 100%;
-    margin-top: 20px;
+a:hover,a:link{
+    text-decoration:none;
 }
 
 em{
     color:red;
     font-style:normal;
+}
+
+hr{
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+
+.resulttip{
+    color: #444;
+    font-size: 11px;
+    margin-bottom: 12px;
+}
+
+#searchform{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#keyword{
+    width: 60%;
+}
+
+.searchitem{
+    width: 100%;
+    margin-bottom: 13px;
+}
+
+.itemcontent{
+    color: #333;
+    font-size: 11px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+
+.updatetime{
+    color: #555;
+    font-size: 11px;
+}
+
+.itemurl{
+    font-size: 11px;
+    color: forestgreen;
 }
