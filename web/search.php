@@ -1,15 +1,19 @@
 <?php
-include_once(dirname(dirname(__FILE__)) . '/Config.php');
-
-$keyword=$_GET['keyword'];
-if(isset($_GET['p'])){
-    $page=intval($_GET['p']);
-}
-else{
-    $page=1;
-}
-$result=Search::searchByKeyWord($keyword,20*($page-1),20);
-$pages=intval($result['hits']['total']/20);
+    include_once(dirname(dirname(__FILE__)) . '/Config.php');
+    $page=isset($_GET['p'])?intval($_GET['p']):1;
+    $keyword=isset($_GET['keyword'])?trim($_GET['keyword']):null;
+    if(empty($keyword)){
+        header('Location: /');
+    }
+    if(mb_strlen($keyword)>40){
+        $keyword_bak=$keyword;
+        $keyword=mb_substr($keyword,0,40);
+    }
+    if($page==1 && mb_strlen($keyword)<15){
+        DB::query("UPDATE record SET `count`=`count`+1 WHERE keyword='".$keyword."'; INSERT INTO record VALUES(null, '".$keyword."' , 1); ",true);
+    }
+    $result=Search::searchByKeyWord($keyword,20*($page-1),20);
+    $pages=intval($result['hits']['total']/20);
 ?>
 
 <!DOCTYPE html>
@@ -18,25 +22,30 @@ $pages=intval($result['hits']['total']/20);
     <title>Zsearch</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 <div class="container">
     <div class="row" id="searchhearder">
-        <div class="col-md-9">
-            <form action="search.php" method="get" class="form form-inline" id="searchform">
-                <input id="keyword" name="keyword" type="text" placeholder="输入关键词" value="<?php echo $keyword?>" class="form-control input-sm">
-                <input type="hidden" name="p" value="1">
-                <button type="button" class="btn btn-default btn-sm" onclick="$('#searchform').submit()">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp;搜 索
+        <div class="col-md-7">
+            <form id="searchform" action="search.php" method="get" class="form form-inline">
+                <input id="keyword" style="width: 65%" name="keyword" type="text" placeholder="输入关键词" value="<?php echo $keyword?>" class="form-control input-sm">
+                <button id="searchbtn"  type="button" class="btn btn-sm btn-primary" onclick="$('#searchform').submit()" style="border-top-right-radius: 14px; border-bottom-right-radius: 14px;">
+                    &nbsp;<span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp;搜&nbsp;&nbsp;索&nbsp;&nbsp;
                 </button>
+                <div id="tip" class="tip" style="width: 62.2%;display: none;"></div>
             </form>
         </div>
     </div>
     <div class="row" id="searchcontent">
         <div class="col-md-8">
             <div class="resulttip">
+                <?php
+                    if(isset($keyword_bak)){
+                        echo "<strong>关键词长度超过40字符限制，仅搜索以下部分：</strong> {$keyword}<br><br>";
+                    }
+                ?>
                 <?php echo "共找到".$result['hits']['total']."个相关网页，用时".($result['took']/1000)."秒"?>
                 <hr>
             </div>
@@ -47,6 +56,8 @@ $pages=intval($result['hits']['total']/20);
                         $url=implode('',$item['highlight']['url']);
                         if(mb_strlen($url,'utf-8')>50){
                             $url=mb_substr($url,0,50,'utf-8');
+                            $url=rtrim($url,'<em');
+                            $url=rtrim($url,'<e');
                             $url=rtrim($url,'</em');
                             $url=rtrim($url,'</e');
                             $url=rtrim($url,'</');
@@ -63,6 +74,8 @@ $pages=intval($result['hits']['total']/20);
                     if(isset($item['highlight']['text'])){
                         $text=implode('...',$item['highlight']['text']);
                         $text=mb_strlen($text,'utf-8')>200?mb_substr($text,0,200,'utf-8'):$text;
+                        $text=rtrim($text,'<em');
+                        $text=rtrim($text,'<e');
                         $text=rtrim($text,'</em');
                         $text=rtrim($text,'</e');
                         $text=rtrim($text,'</');
@@ -125,7 +138,7 @@ $pages=intval($result['hits']['total']/20);
                     <?php endfor; ?>
 
                     <!-- 尾页 -->
-                    <?php if($pages-$page>15 || $pages==0): ?>
+                    <?php if($pages-$page>15 || $pages!=0): ?>
                         <li class="disabled"><a>...</a></li>
                         <li><a href="<?php echo  $pageurl.$pages ?>"><?php echo  $pages?></a></li>
                     <?php endif;?>
@@ -140,4 +153,5 @@ $pages=intval($result['hits']['total']/20);
 </body>
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/script/index.js"></script>
 </html>

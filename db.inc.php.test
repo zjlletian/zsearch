@@ -2,3 +2,9 @@
 
 //Zspider Elasticsearch 集群地址
 $GLOBALS['ESHOST'] = array('http://localhost:9200');
+
+//mysql地址
+$GLOBALS['MYSQL'] = array( 'host'=>'localhost', 'port'=>'3306', 'db'=>'zsearch', 'user'=>'user', 'passwd'=>'passwd' );
+
+ini_set("display_errors", "On");
+error_reporting(E_ALL | E_STRICT);

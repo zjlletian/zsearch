@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(dirname(__FILE__)) . '/Config.php');
+    include_once(dirname(dirname(__FILE__)) . '/Config.php');
 ?>
 
 <!DOCTYPE html>
@@ -8,26 +8,28 @@ include_once(dirname(dirname(__FILE__)) . '/Config.php');
     <title>Zsearch</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body>
+<body class="bg">
 <div class="container">
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <form action="search.php" method="get" class="form form-inline" id="searchform" style="margin-top: 200px">
-                <input style="width: 70%" name="keyword" type="text" placeholder="输入关键词" value="<?php echo $keyword?>" class="form-control input-sm">
+    <div id="searchhearder" class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" style="margin-top:15%; text-align: center">
+            <img src="/img/logo.png"><br><br><br>
+            <form id="searchform" action="search.php" method="get" class="form-inline" style="text-align: left">
+                <input id="keyword" style="width: 80%" name="keyword" type="text" placeholder="输入关键词" class="form-control">
                 <input type="hidden" name="p" value="1">
-                <button type="button" class="btn btn-default btn-sm" onclick="$('#searchform').submit()">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp;搜 索
+                <button id="searchbtn" type="button" class="btn btn-primary" onclick="$('#searchform').submit()" style="border-top-right-radius: 17px; border-bottom-right-radius: 17px;">
+                    &nbsp;<span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp;搜&nbsp;&nbsp;索&nbsp;&nbsp;
                 </button>
+                <div id="tip" class="tip" style="width: 76%;display: none;"></div>
             </form>
         </div>
-        <div class="col-md-2"></div>
     </div>
 </div>
 </body>
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/script/index.js"></script>
 </html>

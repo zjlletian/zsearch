@@ -1,0 +1,101 @@
+body{
+    font-family: 'Microsoft YaHei UI',"Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.bg{
+    background:url('/img/bg.jpg') top center no-repeat;
+    background-size:cover;
+}
+
+a:hover,a:link{
+    text-decoration:none;
+}
+
+em{
+    color:red;
+    font-style:normal;
+}
+
+hr{
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+
+.container{
+    min-width: 992px;
+    max-width: 1170px;
+}
+
+.form-control, .btn{
+    border-radius: 0;
+}
+
+.form-control{
+    border-top-left-radius: 8px;
+}
+
+#searchhearder{
+    height: 50px;
+    padding-top: 10px;
+}
+
+#searchform{
+    width: 100%;
+}
+
+#searchbtn{
+    margin-left: -3.6px;
+    background-color: rgb(102,175,233);
+    border-color:rgb(102,175,233) ;
+}
+
+#searchcontent{
+    min-height: 400px;
+}
+
+.resulttip{
+    color: #444;
+    font-size: 11px;
+    margin-bottom: 12px;
+}
+
+.searchitem{
+    width: 100%;
+    margin-bottom: 13px;
+}
+
+.itemcontent{
+    color: #333;
+    font-size: 11px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+
+.updatetime{
+    color: #555;
+    font-size: 11px;
+}
+
+.itemurl{
+    font-size: 11px;
+    color: forestgreen;
+}
+
+.tip{
+    position:absolute;
+    max-height: 150px;
+    border: 1px solid rgb(150,150,150);
+    border-top:0;
+    z-index: 100;
+    background:rgb(252,252,252);
+    padding: 5px 10px;
+    font-size: 13px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.tiplinkdiv{
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom:5px;
+}
