@@ -15,7 +15,7 @@
 <div class="container">
     <div id="searchhearder" class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-6" style="margin-top:15%; text-align: center">
+        <div class="col-md-6" style="margin-top:10%; text-align: center">
             <img src="/img/logo.png"><br><br><br>
             <form id="searchform" action="search.php" method="get" class="form-inline" style="text-align: left">
                 <input id="keyword" style="width: 80%" name="keyword" type="text" placeholder="输入关键词" class="form-control">
